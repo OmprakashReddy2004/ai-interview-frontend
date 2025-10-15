@@ -1,6 +1,6 @@
 import {
-    signInWithEmailAndPassword,
-    signInWithPopup,
+  signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,14 +22,27 @@ export default function SignInPage() {
   };
 
   const handleGoogleLogin = async () => {
-    await signInWithPopup(auth, googleProvider);
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    console.log("✅ Google login successful:", result.user);
     navigate("/");
-  };
+  } catch (error) {
+    console.error("❌ Google login error:", error.code, error.message);
+    alert(`Google login failed: ${error.code}`);
+  }
+};
 
-  const handleGithubLogin = async () => {
-    await signInWithPopup(auth, githubProvider);
+const handleGithubLogin = async () => {
+  try {
+    const result = await signInWithPopup(auth, githubProvider);
+    console.log("✅ GitHub login successful:", result.user);
     navigate("/");
-  };
+  } catch (error) {
+    console.error("❌ GitHub login error:", error.code, error.message);
+    alert(`GitHub login failed: ${error.code}`);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
