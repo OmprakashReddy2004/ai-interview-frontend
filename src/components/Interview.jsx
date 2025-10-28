@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import { BASE_URL } from "../config";
 import Avatar from "./Avatar";
 import MetricsDashboard from "./MetricsDashboard";
+
 
 export default function Interview() {
   const [question, setQuestion] = useState("Can you explain your latest project?");
@@ -29,7 +31,7 @@ export default function Interview() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/api/interview/evaluate", {
+      const res = await axios.post(`${BASE_URL}/api/interview/evaluate`, {
         answer: transcript,
       });
       setMetrics(res.data);

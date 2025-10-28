@@ -3,11 +3,13 @@ import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
+import InterviewLive from "./pages/InterviewLive";
 import InterviewPage from "./pages/InterviewPage";
+import InterviewPrep from "./pages/InterviewPrep";
 import ResumeAnalyzerPage from "./pages/ResumeAnalyzerPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-
+import TopicWiseInterview from "./pages/TopicWiseInterview";
 export default function App() {
   return (
     <BrowserRouter>
@@ -44,6 +46,28 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/interview/topics" 
+              element={
+                <ProtectedRoute>
+                    <TopicWiseInterview />
+                  </ProtectedRoute>
+              }
+            />
+            <Route path="/interview/prep" 
+              element={
+                <ProtectedRoute>
+                   <InterviewPrep />
+                  </ProtectedRoute>
+              }
+            />
+            <Route path="/interview/live" 
+              element={
+                <ProtectedRoute>
+                   <InterviewLive />
+                  </ProtectedRoute>
+              }
+            />
+
           </Routes>
         </div>
       </div>

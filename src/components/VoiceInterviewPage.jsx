@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
+import { BASE_URL } from "../config";
 import useVoiceInterview from "../hooks/useVoiceInterview";
-
-const API = "http://localhost:8080";
+const API = `${BASE_URL}`;
 
 export default function VoiceInterviewPage() {
   const [role, setRole] = useState("Backend Engineer");

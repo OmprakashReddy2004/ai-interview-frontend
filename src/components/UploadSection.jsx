@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { BASE_URL } from "../config";
+
 
 export default function UploadSection() {
   const [resume, setResume] = useState(null);
@@ -16,7 +18,7 @@ export default function UploadSection() {
     formData.append("jdText", jdText); // send JD as text instead of PDF file
 
     try {
-      const res = await axios.post("http://localhost:8080/api/resume/analyze", formData);
+      const res = await axios.post(`${BASE_URL}/api/resume/analyze`, formData);
       setScore(res.data.compatibilityScore);
     } catch (err) {
       console.error(err);

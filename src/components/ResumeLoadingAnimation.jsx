@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../config";
 
 export default function ResumeLoadingAnimation({ onResult }) {
   const [stage, setStage] = useState(0);
@@ -35,7 +36,7 @@ export default function ResumeLoadingAnimation({ onResult }) {
         formData.append("resume", window.__resumeFile);
         formData.append("jobDescription", window.__jobDescription);
 
-        const response = await fetch("http://localhost:8080/api/resume/analyze", {
+        const response = await fetch(`${BASE_URL}/api/resume/analyze`, {
           method: "POST",
           body: formData,
         });
