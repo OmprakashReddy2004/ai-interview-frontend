@@ -1,57 +1,85 @@
 import { useEffect, useState } from "react";
 import DashboardCard from "../components/DashboardCard";
 import MetricsChart from "../components/MetricsChart";
-import { pingBackend } from "../services/backendApi"; // ✅ new import
+import { pingBackend } from "../services/backendApi";
 
 export default function Dashboard() {
   const stats = [
-    { title: "Interviews Taken", value: 12, color: "bg-blue-500" },
-    { title: "Avg Accuracy", value: "84%", color: "bg-green-500" },
-    { title: "Avg Confidence", value: "76%", color: "bg-purple-500" },
-    { title: "Coding Problems Solved", value: 18, color: "bg-orange-500" },
+    { title: "Interviews Taken", value: 12 },
+    { title: "Avg Accuracy", value: "84%" },
+    { title: "Avg Confidence", value: "76%" },
+    { title: "Problems Solved", value: 18 },
   ];
 
   const [backendMsg, setBackendMsg] = useState("Checking connection...");
 
-  // 🔹 Step 2: Call backend on component mount
   useEffect(() => {
     pingBackend().then(setBackendMsg);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center">
-        📈 Your Performance Dashboard
-      </h2>
+    <div className="relative min-h-screen bg-black text-white overflow-hidden">
 
-      {/* 🔹 Backend connection result */}
-      <div className="bg-gray-100 p-4 rounded-xl mb-8 text-center shadow">
-        <p className="text-gray-700 font-semibold">Backend Connection:</p>
-        <p className="text-green-700 font-medium">{backendMsg}</p>
+      {/* Background Glow */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-purple-600/20 blur-[200px] pointer-events-none"/>
+
+      <div className="relative max-w-7xl mx-auto px-6 py-12">
+
+        {/* Header */}
+        <div className="mb-10">
+          <h1 className="text-4xl font-bold tracking-tight">
+            Performance Dashboard
+          </h1>
+
+          <p className="text-gray-400 mt-2">
+            Track your interview performance and improve with AI feedback.
+          </p>
+        </div>
+
+        {/* Backend status */}
+        <div className="mb-8 backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+          <span className="text-gray-400">Backend Status</span>
+
+          <span className="text-green-400 font-medium">
+            {backendMsg}
+          </span>
+        </div>
+
+        {/* Stat cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+
+          {stats.map((s, i) => (
+            <DashboardCard key={i} {...s}/>
+          ))}
+
+        </div>
+
+        {/* Chart section */}
+        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg">
+
+          <h3 className="text-lg font-semibold mb-6">
+            Interview Performance Over Time
+          </h3>
+
+          <MetricsChart />
+
+        </div>
+
+        {/* Coming soon */}
+        <div className="mt-10 backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 text-center">
+
+          <h3 className="text-xl font-semibold mb-2">
+            Coming Soon
+          </h3>
+
+          <p className="text-gray-400">
+            AI-evaluated coding challenges with hints and real interview scoring.
+          </p>
+
+        </div>
+
       </div>
 
-      {/* Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {stats.map((s, i) => (
-          <DashboardCard key={i} {...s} />
-        ))}
-      </div>
-
-      {/* Charts */}
-      <div className="bg-white p-6 rounded-2xl shadow-md">
-        <h3 className="text-lg font-semibold text-gray-700 mb-4">
-          Interview Performance Over Time
-        </h3>
-        <MetricsChart />
-      </div>
-
-      {/* Future Section */}
-      <div className="mt-10 text-center">
-        <h3 className="text-xl font-semibold mb-2">🧩 Coming Soon</h3>
-        <p className="text-gray-600">
-          LeetCode-style coding challenges with AI evaluation and hints!
-        </p>
-      </div>
     </div>
   );
 }
