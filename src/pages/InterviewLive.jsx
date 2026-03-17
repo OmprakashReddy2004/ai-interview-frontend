@@ -153,7 +153,7 @@ export default function InterviewLive() {
   useEffect(() => {
     if (questions.length > 0) {
       setTimeout(() => speakQuestion(questions[0].question), 1000);
-    }
+    }  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions]);
 
   if (!questions.length) {

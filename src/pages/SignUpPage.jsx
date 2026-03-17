@@ -25,7 +25,7 @@ export default function SignUpPage() {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user?.emailVerified) navigate("/interview/setup", { replace: true });
     });
-    return () => unsub();
+    return () => unsub(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // intentionally run once on mount only
 
   // Countdown timer for resend button

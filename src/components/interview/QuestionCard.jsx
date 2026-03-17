@@ -16,7 +16,8 @@ export default function QuestionCard({ question, index, total, timeLeft, onHint,
     u.rate = 0.92;
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(u);
-    return () => window.speechSynthesis.cancel();
+   
+    return () => window.speechSynthesis.cancel();  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question?.id]);
 
   const mins = String(Math.floor(timeLeft / 60)).padStart(2, "0");

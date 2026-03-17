@@ -24,7 +24,7 @@ export default function SignInPage() {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user?.emailVerified) navigate(from, { replace: true });
     });
-    return () => unsub();
+    return () => unsub();// eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // intentionally run once on mount only
 
   const handleEmailLogin = async (e) => {

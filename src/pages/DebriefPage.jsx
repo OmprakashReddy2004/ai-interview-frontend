@@ -18,7 +18,7 @@ export default function DebriefPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (answers.length) generateCoachingNotes(answers).then(setCoaching);
+    if (answers.length) generateCoachingNotes(answers).then(setCoaching);  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!scores) return (
