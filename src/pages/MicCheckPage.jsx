@@ -60,7 +60,7 @@ export default function MicCheckPage() {
             </div>
 
             <button
-              onClick={() => navigate("/interview/live")}
+              onClick={() => navigate("/interview/session")}
               disabled={!passed}
               style={{
                 width: "100%", padding: "0.95rem", borderRadius: 12, border: "none",

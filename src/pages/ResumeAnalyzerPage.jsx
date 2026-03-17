@@ -204,12 +204,29 @@ export default function ResumeAnalyzerPage() {
           High-Fidelity AI Analysis · 2026
         </div>
         <div style={{ display: "flex", gap: "1.5rem" }}>
-          {["Privacy", "Terms", "Contact"].map(l => (
-            <a key={l} href="#" style={{ fontSize: "0.78rem", color: "rgba(245,244,240,0.25)", textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.target.style.color = "#F5F4F0"}
-              onMouseLeave={e => e.target.style.color = "rgba(245,244,240,0.25)"}>{l}</a>
-          ))}
-        </div>
+  {["Privacy", "Terms", "Contact"].map(l => (
+    <button
+      key={l}
+      type="button"
+      onClick={() => {}}
+      style={{
+        background: "none",
+        border: "none",
+        padding: 0,
+        cursor: "pointer",
+        fontSize: "0.78rem",
+        color: "rgba(245,244,240,0.25)",
+        fontFamily: "'DM Sans', sans-serif",
+        fontWeight: 300,
+        transition: "color 0.2s",
+      }}
+      onMouseEnter={e => e.currentTarget.style.color = "#F5F4F0"}
+      onMouseLeave={e => e.currentTarget.style.color = "rgba(245,244,240,0.25)"}
+    >
+      {l}
+    </button>
+  ))}
+</div>
       </footer>
     </div>
   );

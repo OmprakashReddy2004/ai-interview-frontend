@@ -343,7 +343,7 @@ export default function Home() {
           <div className="pricing-card featured">
             <div style={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", background: "linear-gradient(135deg, #7B5CF5, #3B8BEB)", color: "white", fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase", padding: "0.3rem 0.9rem", borderRadius: 100, whiteSpace: "nowrap" }}>Most popular</div>
             <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1rem", marginBottom: "0.75rem" }}>Pro</div>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "2.8rem", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1 }}>$19 <span style={{ fontSize: "1rem", fontWeight: 400, color: "rgba(245,244,240,0.45)" }}>/ month</span></div>
+            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "2.8rem", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1 }}>$5 <span style={{ fontSize: "1rem", fontWeight: 400, color: "rgba(245,244,240,0.45)" }}>/ month</span></div>
             <p style={{ fontSize: "0.82rem", color: "rgba(245,244,240,0.45)", margin: "0.75rem 0 1.5rem", fontWeight: 300 }}>For serious candidates who want to land fast.</p>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.65rem", marginBottom: "2rem" }}>
               {["Unlimited mock interviews", "Deep AI feedback + coaching tips", "Company-specific question sets", "Resume intelligence (unlimited)", "Progress tracking dashboard", "Priority support"].map(f => (
@@ -361,7 +361,7 @@ export default function Home() {
           {/* Team */}
           <div className="pricing-card">
             <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1rem", marginBottom: "0.75rem" }}>Team</div>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "2.8rem", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1 }}>$49 <span style={{ fontSize: "1rem", fontWeight: 400, color: "rgba(245,244,240,0.45)" }}>/ month</span></div>
+            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "2.8rem", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1 }}>$12 <span style={{ fontSize: "1rem", fontWeight: 400, color: "rgba(245,244,240,0.45)" }}>/ month</span></div>
             <p style={{ fontSize: "0.82rem", color: "rgba(245,244,240,0.45)", margin: "0.75rem 0 1.5rem", fontWeight: 300 }}>For bootcamps, colleges, and hiring programs.</p>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.65rem", marginBottom: "2rem" }}>
               {["Everything in Pro", "Up to 10 seats", "Admin dashboard", "Bulk resume analysis", "Dedicated account manager"].map(f => (
@@ -390,12 +390,33 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer style={{ marginTop: "5rem", padding: "3rem 5vw", borderTop: "1px solid rgba(245,244,240,0.1)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
-        <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "1rem", background: "linear-gradient(135deg, #7B5CF5, #3B8BEB)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI Interviewer</div>
-        <p style={{ fontSize: "0.8rem", color: "rgba(245,244,240,0.45)", fontWeight: 300 }}>© 2025 AI Interviewer. All rights reserved.</p>
-        <div style={{ display: "flex", gap: "1.5rem" }}>
-          {["Privacy", "Terms", "Blog", "Contact"].map(l => <a key={l} href="#" className="footer-link">{l}</a>)}
-        </div>
-      </footer>
+  <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "1rem", background: "linear-gradient(135deg, #7B5CF5, #3B8BEB)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI Interviewer</div>
+  <p style={{ fontSize: "0.8rem", color: "rgba(245,244,240,0.45)", fontWeight: 300 }}>© 2026 AI Interviewer. All rights reserved.</p>
+  <div style={{ display: "flex", gap: "1.5rem" }}>
+    {["Privacy", "Terms", "Blog", "Contact"].map(l => (
+      <button
+        key={l}
+        type="button"
+        onClick={() => {}}
+        style={{
+          background: "none",
+          border: "none",
+          padding: 0,
+          cursor: "pointer",
+          fontSize: "0.8rem",
+          color: "rgba(245,244,240,0.45)",
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 300,
+          transition: "color 0.2s",
+        }}
+        onMouseEnter={e => e.currentTarget.style.color = "#F5F4F0"}
+        onMouseLeave={e => e.currentTarget.style.color = "rgba(245,244,240,0.45)"}
+      >
+        {l}
+      </button>
+    ))}
+  </div>
+</footer>
     </div>
   );
 }

@@ -6,7 +6,7 @@ import MetricsDashboard from "./MetricsDashboard";
 
 
 export default function Interview() {
-  const [question, setQuestion] = useState("Can you explain your latest project?");
+  const [question] = useState("Can you explain your latest project?");
   const [transcript, setTranscript] = useState("");
   const [metrics, setMetrics] = useState(null);
   const [recording, setRecording] = useState(false);

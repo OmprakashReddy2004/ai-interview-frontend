@@ -1,9 +1,10 @@
 import {
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth, githubProvider, googleProvider } from "../firebase";
 
 export default function SignInPage() {
@@ -12,13 +13,26 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(null); // 'email' | 'google' | 'github'
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Where to redirect after login — use intended destination or fallback
+  const from = location.state?.from || "/interview/setup";
+
+  // If already signed in and verified, skip this page entirely
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (user?.emailVerified) navigate(from, { replace: true });
+    });
+    return () => unsub();
+  }, []); // intentionally run once on mount only
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     setLoading("email");
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (err) {
       alert(err.message);
     } finally {
@@ -30,7 +44,7 @@ export default function SignInPage() {
     setLoading("google");
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       alert(`Google login failed: ${error.code}`);
     } finally {
@@ -42,7 +56,7 @@ export default function SignInPage() {
     setLoading("github");
     try {
       await signInWithPopup(auth, githubProvider);
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       alert(`GitHub login failed: ${error.code}`);
     } finally {
@@ -232,11 +246,11 @@ export default function SignInPage() {
           </div>
 
           <div style={{ textAlign: "right", marginTop: "-0.25rem" }}>
-            <a href="#" style={{ fontSize: "0.78rem", color: "rgba(155,124,247,0.7)", textDecoration: "none", fontWeight: 400 }}
+            <button type="button" style={{ background: "none", border: "none", fontSize: "0.78rem", color: "rgba(155,124,247,0.7)", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 400, padding: 0 }}
               onMouseEnter={e => e.target.style.color = "#9B7CF7"}
               onMouseLeave={e => e.target.style.color = "rgba(155,124,247,0.7)"}>
               Forgot password?
-            </a>
+            </button>
           </div>
 
           <button type="submit" className="btn-main" disabled={loading !== null}>
@@ -254,7 +268,6 @@ export default function SignInPage() {
         {/* OAuth buttons */}
         <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
           <button className="btn-oauth" onClick={handleGoogleLogin} disabled={loading !== null}>
-            {/* Google icon */}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M15.36 8.18c0-.57-.05-1.12-.14-1.64H8v3.1h4.12a3.52 3.52 0 01-1.53 2.31v1.92h2.47c1.45-1.33 2.3-3.3 2.3-5.69z" fill="#4285F4"/>
               <path d="M8 16c2.07 0 3.8-.69 5.07-1.86l-2.47-1.92c-.68.46-1.56.73-2.6.73-2 0-3.7-1.35-4.3-3.17H1.15v1.98A7.99 7.99 0 008 16z" fill="#34A853"/>
@@ -265,7 +278,6 @@ export default function SignInPage() {
           </button>
 
           <button className="btn-oauth" onClick={handleGithubLogin} disabled={loading !== null}>
-            {/* GitHub icon */}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
               <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
             </svg>
